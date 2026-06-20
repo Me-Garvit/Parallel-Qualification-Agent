@@ -132,7 +132,7 @@ if (Test-Path $SKILL_DIR) {
     git -C $SKILL_DIR pull -q
 } else {
     Write-Host "Downloading qualification-agent..."
-    git clone -q https://github.com/garvit-exe/qualification-agent $SKILL_DIR
+    git clone -q https://github.com/Me-Garvit/Parallel-Qualification-Agent $SKILL_DIR
 }
 Write-Host "Done."
 Write-Host ""

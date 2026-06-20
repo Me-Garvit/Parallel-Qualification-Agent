@@ -6,12 +6,12 @@ A Claude Code skill that qualifies a list of companies against an Ideal Customer
 
 **macOS / Linux** — paste this in Terminal:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/garvit-exe/qualification-agent/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Me-Garvit/Parallel-Qualification-Agent/main/install.sh | bash
 ```
 
 **Windows** — paste this in PowerShell:
 ```powershell
-irm https://raw.githubusercontent.com/garvit-exe/qualification-agent/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/Me-Garvit/Parallel-Qualification-Agent/main/install.ps1 | iex
 ```
 
 Both installers handle everything: installing prerequisites, cloning the skill, installing dependencies, and saving your API key. Get your Parallel API key at [platform.parallel.ai](https://platform.parallel.ai).

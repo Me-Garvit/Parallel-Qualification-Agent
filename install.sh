@@ -1,6 +1,6 @@
 #!/bin/bash
 # Qualification Agent — macOS/Linux Installer
-# Run: curl -fsSL https://raw.githubusercontent.com/garvit-exe/qualification-agent/main/install.sh | bash
+# Run: curl -fsSL https://raw.githubusercontent.com/Me-Garvit/Parallel-Qualification-Agent/main/install.sh | bash
 
 set -e
 
@@ -57,7 +57,7 @@ if [ -d "$SKILL_DIR" ]; then
     git -C "$SKILL_DIR" pull -q
 else
     echo "Downloading qualification-agent..."
-    git clone -q https://github.com/garvit-exe/qualification-agent "$SKILL_DIR"
+    git clone -q https://github.com/Me-Garvit/Parallel-Qualification-Agent "$SKILL_DIR"
 fi
 echo "Done."
 echo ""
