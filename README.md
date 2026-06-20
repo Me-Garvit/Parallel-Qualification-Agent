@@ -1,4 +1,4 @@
-# qualification-agent
+# Qualification-agent
 
 A Claude Code skill that qualifies a list of companies against an Ideal Customer Profile (ICP) using the [Parallel API](https://parallel.ai) — Search for broad signals, Task API for deep research on ambiguous cases.
 
