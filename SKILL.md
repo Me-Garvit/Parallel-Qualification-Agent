@@ -47,7 +47,13 @@ python3 ~/.claude/skills/qualification-agent/tools/runner.py batch-search "<csv_
 python3 %USERPROFILE%\.claude\skills\qualification-agent\tools\runner.py batch-search "<csv_path>"
 ```
 
-Progress prints to stderr (`[1/N] searched: Company Name`). Stdout is a JSON array:
+Progress prints to stderr (`[1/N] searched: Company Name`). Stdout is a JSON object:
+
+```json
+{"results_file": "/tmp/abcd1234.json", "count": 5}
+```
+
+Read the full results array from the file at `results_file` using the Read tool. The file contains:
 
 ```json
 [

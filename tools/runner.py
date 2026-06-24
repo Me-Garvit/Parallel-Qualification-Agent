@@ -21,8 +21,20 @@ Returns JSON to stdout; progress lines go to stderr.
 
 import sys
 import os
+import re
 import json
+import tempfile
 import csv as csv_module
+
+
+def _clean_excerpt(text: str) -> str:
+    """Collapse markdown links to anchor text; drop empty-anchor links."""
+    # Drop image links and empty-anchor links: [](url) or [![alt](src)](url)
+    text = re.sub(r'\[!?\[[^\]]*\]\([^)]*\)\]\([^)]*\)', '', text)
+    text = re.sub(r'\[\]\([^)]*\)', '', text)
+    # Collapse [text](url) → text
+    text = re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', text)
+    return text.strip()
 
 def load_api_key() -> str:
     api_key = os.environ.get("PARALLEL_API_KEY")
@@ -94,7 +106,7 @@ def _search_company(client, name: str, domain: str) -> dict:
                 "url": r.url,
                 "title": r.title,
                 "publish_date": r.publish_date,
-                "excerpts": list(r.excerpts),
+                "excerpts": [_clean_excerpt(e) for e in r.excerpts],
             })
     except Exception as e:
         entry["search_error"] = str(e)
@@ -148,7 +160,11 @@ def cmd_batch_search(csv_path: str) -> None:
         output.append(entry)
         print(f"[{i}/{total}] searched: {name}", file=sys.stderr)
 
-    print(json.dumps(output))
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8") as f:
+        json.dump(output, f)
+        tmp_path = f.name
+
+    print(json.dumps({"results_file": tmp_path, "count": len(output)}))
 
 
 def cmd_write_results(json_str: str) -> None:
@@ -204,7 +220,7 @@ def cmd_search(query: str) -> None:
                 "url": r.url,
                 "title": r.title,
                 "publish_date": r.publish_date,
-                "excerpts": list(r.excerpts),
+                "excerpts": [_clean_excerpt(e) for e in r.excerpts],
             })
         print(json.dumps({
             "search_id": getattr(search, "search_id", None),
